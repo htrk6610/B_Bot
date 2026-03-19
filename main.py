@@ -10,7 +10,8 @@ from handlers import (
     alarm,
     power,
     community,
-    complaints
+    complaints,
+    back
 )
 
 bot = Bot(token=BOT_TOKEN)
@@ -25,6 +26,7 @@ async def main():
     dp.include_router(power.router)
     dp.include_router(community.router)
     dp.include_router(complaints.router)
+    dp.include_router(back.router)
 
     await dp.start_polling(bot)
 

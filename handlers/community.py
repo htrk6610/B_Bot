@@ -3,6 +3,7 @@ from aiogram.types import Message
 
 from keyboards.community_menu import community_menu
 from keyboards.main_menu import main_menu
+from utils.navigation import set_menu
 
 router = Router()
 
