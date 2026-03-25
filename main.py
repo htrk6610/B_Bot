@@ -2,6 +2,7 @@ import asyncio
 from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
 from aiogram.fsm.storage.memory import MemoryStorage
+from database.db import init_db
 
 from handlers import (
     start,
@@ -14,6 +15,8 @@ from handlers import (
     other,
     back
 )
+
+init_db()
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(storage=MemoryStorage())

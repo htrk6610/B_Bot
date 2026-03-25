@@ -9,21 +9,51 @@ from utils.allowed_users import ALLOWED_PHONES
 from keyboards.main_menu import main_menu
 from states.menu_states import MenuState
 from utils.navigation import set_menu
+from database.db import cursor, conn
 
 router = Router()
 
 @router.message(Command("start"))
 async def start_command(message: Message, state: FSMContext):
-    await message.answer(
-        "Для доступу до бота поділіться номером телефону:",
-        reply_markup=phone_keyboard
+    telegram_id = message.from_user.id
+
+    cursor.execute(
+        "SELECT is_allowed FROM users WHERE telegram_id = ?",
+        (telegram_id,)
     )
+    user = cursor.fetchone()
+
+    if user:
+        if user[0] == 1:
+            await set_menu(state, "main")
+
+            await message.answer(
+                "З поверненням 👋",
+                reply_markup=main_menu
+            )
+        else:
+            await message.answer("⛔ Доступ заборонено")
+    else:
+        await message.answer(
+            "Для доступу поділіться номером телефону:",
+            reply_markup=phone_keyboard
+        )
 
 @router.message(F.contact)
 async def get_contact(message: Message, state: FSMContext):
     phone = message.contact.phone_number
+    telegram_id = message.from_user.id
 
-    if phone in ALLOWED_PHONES:
+    is_allowed = 1 if phone in ALLOWED_PHONES else 0
+
+    # сохраняем в БД
+    cursor.execute(
+        "INSERT INTO users (telegram_id, phone, is_allowed) VALUES (?, ?, ?)",
+        (telegram_id, phone, is_allowed)
+    )
+    conn.commit()
+
+    if is_allowed:
         await set_menu(state, "main")
 
         await message.answer(
