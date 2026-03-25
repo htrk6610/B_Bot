@@ -28,11 +28,11 @@ async def start_command(message: Message, state: FSMContext):
             await set_menu(state, "main")
 
             await message.answer(
-                "З поверненням 👋",
+                "З поверненням 👋 тестувальник :)\nОберіть розділ:\n(погода + паливо +)",
                 reply_markup=main_menu
             )
         else:
-            await message.answer("⛔ Доступ заборонено")
+            await message.answer("⛔ Доступ заборонено. Бот перебуває в тестовому режимі.")
     else:
         await message.answer(
             "Для доступу поділіться номером телефону:",
@@ -57,11 +57,11 @@ async def get_contact(message: Message, state: FSMContext):
         await set_menu(state, "main")
 
         await message.answer(
-            "Доступ дозволено ✅",
+            "Доступ дозволено ✅. Вітаємо у тестувані бота Бучанської Громади.\nОберіть розділ:\n(погода + паливо +)",
             reply_markup=main_menu
         )
     else:
-        await message.answer("⛔ Доступ заборонено")
+        await message.answer("⛔ Доступ заборонено. Бот перебуває в тестовому режимі.")
 
 @router.message(Command("start"))
 async def start_command(message: Message, state: FSMContext):

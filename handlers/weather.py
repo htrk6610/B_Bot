@@ -11,6 +11,15 @@ from utils.navigation import set_menu
 
 router = Router()
 
+@router.message(F.text == "🌤 Погода")
+async def weather_menu_open(message: Message, state: FSMContext):
+    await set_menu(state, "weather")
+
+    await message.answer(
+        "Розділ погоди",
+        reply_markup=weather_menu
+    )
+
 @router.message(F.text == "🌤 Погода зараз")
 async def ask_city(message: Message, state: FSMContext):
     await state.set_state(WeatherState.waiting_for_city)
