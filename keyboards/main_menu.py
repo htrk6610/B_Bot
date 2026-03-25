@@ -3,19 +3,24 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 main_menu = ReplyKeyboardMarkup(
     keyboard=[
         [
+            KeyboardButton(text="⚡ Світло"),
+            KeyboardButton(text="⛽ Пальне")
+        ],
+        [
             KeyboardButton(text="🌤 Погода"),
             KeyboardButton(text="🌫 Якість повітря")
         ],
         [
-            KeyboardButton(text="🚨 Повітряна тривога"),
-            KeyboardButton(text="⚡ Відключення світла")
+            KeyboardButton(text="🪖 Ветеранам та їх родинам"),
+            KeyboardButton(text="🤝 Соціальні послуги")
         ],
         [
-            KeyboardButton(text="🏛 Моя Громада"),
-            KeyboardButton(text="📩 Мої Звернення")
+            KeyboardButton(text="🏠 Пункти Незламності"),
+            KeyboardButton(text="🚨 Повітряна тривога")
         ],
         [
-            KeyboardButton(text="⭐ Мої підписки")
+            KeyboardButton(text="🚨 Повідомлення про корупцію"),
+            KeyboardButton(text="📩 Мої звернення")
         ]
     ],
     resize_keyboard=True

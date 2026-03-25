@@ -11,6 +11,7 @@ from handlers import (
     power,
     community,
     complaints,
+    other,
     back
 )
 
@@ -26,6 +27,7 @@ async def main():
     dp.include_router(power.router)
     dp.include_router(community.router)
     dp.include_router(complaints.router)
+    dp.include_router(other.router)
     dp.include_router(back.router)
 
     await dp.start_polling(bot)

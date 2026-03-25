@@ -7,8 +7,10 @@ from utils.navigation import set_menu
 
 router = Router()
 
-@router.message(F.text == "⚡ Відключення світла")
-async def power_menu_open(message: Message):
+@router.message(F.text == "⚡ Світло")
+async def power_menu_open(message: Message, state: FSMContext):
+    await set_menu(state, "power")
+
     await message.answer(
         "Інформація про відключення світла",
         reply_markup=power_menu
