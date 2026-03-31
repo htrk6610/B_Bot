@@ -7,7 +7,7 @@ from database.db import init_db
 from handlers import (
     start,
     weather,
-    air,
+    tourism,
     alarm,
     light,
     veterans,
@@ -29,8 +29,7 @@ async def main():
 
     dp.include_router(start.router)
     dp.include_router(weather.router)
-    dp.include_router(air.router)
-    dp.include_router(alarm.router)
+    dp.include_router(tourism.router)
     dp.include_router(light.router)
     dp.include_router(community.router)
     dp.include_router(complaints.router)

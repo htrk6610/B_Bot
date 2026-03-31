@@ -12,7 +12,11 @@ main_menu = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="🪖 Ветеранам та їх родинам"),
-            KeyboardButton(text="🤝 Соціальні послуги")
+
+        ],
+        [
+            KeyboardButton(text="🤝 Соціальні послуги"),
+            KeyboardButton(text="🗺 Туризм")
         ],
         [
             KeyboardButton(text="🏠 Пункти Незламності"),
@@ -24,4 +28,4 @@ main_menu = ReplyKeyboardMarkup(
         ]
     ],
     resize_keyboard=True
-)
+)            
