@@ -9,10 +9,13 @@ from handlers import (
     weather,
     air,
     alarm,
-    power,
+    light,
+    veterans,
     community,
     complaints,
     fuel,
+    corruption,
+    admin,
     other,
     back
 )
@@ -28,11 +31,14 @@ async def main():
     dp.include_router(weather.router)
     dp.include_router(air.router)
     dp.include_router(alarm.router)
-    dp.include_router(power.router)
+    dp.include_router(light.router)
     dp.include_router(community.router)
     dp.include_router(complaints.router)
     dp.include_router(fuel.router)
     dp.include_router(other.router)
+    dp.include_router(veterans.router)
+    dp.include_router(corruption.router)
+    dp.include_router(admin.router)
     dp.include_router(back.router)
 
     await dp.start_polling(bot)

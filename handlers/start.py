@@ -5,7 +5,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
 from keyboards.phone_request import phone_keyboard
-from utils.allowed_users import ALLOWED_PHONES
+from utils.allowed_users import is_allowed_phone
 from keyboards.main_menu import main_menu
 from states.menu_states import MenuState
 from utils.navigation import set_menu
@@ -28,11 +28,11 @@ async def start_command(message: Message, state: FSMContext):
             await set_menu(state, "main")
 
             await message.answer(
-                "З поверненням 👋 тестувальник :)\nОберіть розділ:\n(погода + паливо +)",
+                "З поверненням 👋\nОберіть розділ:\n",
                 reply_markup=main_menu
             )
         else:
-            await message.answer("⛔ Доступ заборонено. Бот перебуває в тестовому режимі.")
+            await message.answer("⛔ Доступ заборонено.")
     else:
         await message.answer(
             "Для доступу поділіться номером телефону:",
@@ -44,7 +44,7 @@ async def get_contact(message: Message, state: FSMContext):
     phone = message.contact.phone_number
     telegram_id = message.from_user.id
 
-    is_allowed = 1 if phone in ALLOWED_PHONES else 0
+    is_allowed = 1 if is_allowed_phone(phone) else 0
 
     # сохраняем в БД
     cursor.execute(
@@ -57,11 +57,11 @@ async def get_contact(message: Message, state: FSMContext):
         await set_menu(state, "main")
 
         await message.answer(
-            "Доступ дозволено ✅. Вітаємо у тестувані бота Бучанської Громади.\nОберіть розділ:\n(погода + паливо +)",
+            "Доступ дозволено ✅. Вітаємо у боті Бучанської Громади.\nОберіть розділ:\n",
             reply_markup=main_menu
         )
     else:
-        await message.answer("⛔ Доступ заборонено. Бот перебуває в тестовому режимі.")
+        await message.answer("⛔ Доступ заборонено.")
 
 @router.message(Command("start"))
 async def start_command(message: Message, state: FSMContext):
