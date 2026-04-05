@@ -29,3 +29,24 @@ async def broadcast(message: Message, bot: Bot):
             pass
 
     await message.answer(f"✅ Надіслано {count} користувачам")
+
+@router.message(F.text.startswith("/reply"))
+async def reply_user(message: Message, bot: Bot):
+    if message.from_user.id not in ADMINS:
+        return
+
+    try:
+        parts = message.text.split(" ", 2)
+
+        user_id = int(parts[1])
+        text = parts[2]
+
+        await bot.send_message(
+            user_id,
+            f"📩 Відповідь:\n\n{text}"
+        )
+
+        await message.answer("✅ Відповідь надіслано")
+
+    except:
+        await message.answer("❌ Формат: /reply user_id текст")

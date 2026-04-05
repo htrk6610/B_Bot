@@ -37,8 +37,11 @@ async def get_city_weather(message: Message, state: FSMContext):
         return
 
     text = (
-        f"📍 {weather['city']}\n"
+        f"📍 {weather['city']}\n\n"
         f"🌡 Температура: {weather['temp']}°C\n"
+        f"🤔 Відчувається: {weather['feels_like']}°C\n"
+        f"💧 Вологість: {weather['humidity']}%\n"
+        f"🌬 Вітер: {weather['wind']} м/с\n"
         f"☁️ {weather['description']}"
     )
 
